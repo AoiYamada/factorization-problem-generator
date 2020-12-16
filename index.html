@@ -36,8 +36,8 @@
         <p>
           (x + <span id="a"></span>)(x + <span id="b"></span>)(x +
           <span id="c"></span>)(x + <span id="d"></span>)-<span id="g"></span
-          >x^2 = (x^2 + <span id="yAddZ"></span>x + <span id="xy"></span>)(x^2 +
-          <span id="xAddW"></span>x + <span id="wz"></span>)
+          >x^2 = (x^2 + <span id="hMinusF"></span>x + <span id="xy"></span>)(x^2
+          + <span id="hAddF"></span>x + <span id="wz"></span>)
         </p>
       </section>
     </main>
@@ -72,9 +72,9 @@
         const cDom = document.getElementById("c");
         const dDom = document.getElementById("d");
         const gDom = document.getElementById("g");
-        const yAddZDom = document.getElementById("yAddZ");
+        const hMinusFDom = document.getElementById("hMinusF");
         const xyDom = document.getElementById("xy");
-        const xAddWDom = document.getElementById("xAddW");
+        const hAddFDom = document.getElementById("hAddF");
         const wzDom = document.getElementById("wz");
 
         const fErrorDom = document.getElementById("f-error");
@@ -151,6 +151,7 @@
           }
 
           const g = f ** 2 - e ** 2;
+          const h = (x + y + z + w) / 2;
 
           const abcd = [x, y, z, w].sort((a, b) => a - b);
 
@@ -158,15 +159,9 @@
           bDom.innerText = abcd[1];
           cDom.innerText = abcd[2];
           dDom.innerText = abcd[3];
-          gDom.innerText = g > 1 ? g : "";
-
-          if (y + z < x + w) {
-            yAddZDom.innerText = y + z;
-            xAddWDom.innerText = x + w;
-          } else {
-            yAddZDom.innerText = x + w;
-            xAddWDom.innerText = y + z;
-          }
+          gDom.innerText = g;
+          hMinusFDom.innerText = h - f;
+          hAddFDom.innerText = h + f;
           xyDom.innerText = xy;
           wzDom.innerText = xy;
         };
