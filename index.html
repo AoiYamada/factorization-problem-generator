@@ -33,12 +33,7 @@
         </div>
       </section>
       <section>
-        <p>
-          (x + <span id="a"></span>)(x + <span id="b"></span>)(x +
-          <span id="c"></span>)(x + <span id="d"></span>)-<span id="g"></span
-          >x^2 = (x^2 + <span id="hMinusF"></span>x + <span id="xy"></span>)(x^2
-          + <span id="hAddF"></span>x + <span id="wz"></span>)
-        </p>
+        <p id="result">Fill x, y, z, f first</p>
       </section>
     </main>
     <footer>
@@ -46,131 +41,7 @@
       <a href="https://www.facebook.com/qedmathblog/posts/3680995745327627"
         >QED Math Blog</a
       >
-      <script>
-        // https://stackoverflow.com/questions/39899072/how-to-find-prime-factors-using-a-for-loop-in-javascript
-        const findUniquePrimeFactors = (num) => {
-          const factors = [];
-          let divisor = 2;
-
-          while (num >= 2) {
-            if (num % divisor == 0) {
-              factors.push(divisor);
-              num = num / divisor;
-            } else {
-              divisor++;
-            }
-          }
-          return [...new Set(factors)];
-        };
-
-        const xDom = document.getElementById("x");
-        const yDom = document.getElementById("y");
-        const zDom = document.getElementById("z");
-        const fDom = document.getElementById("f");
-        const aDom = document.getElementById("a");
-        const bDom = document.getElementById("b");
-        const cDom = document.getElementById("c");
-        const dDom = document.getElementById("d");
-        const gDom = document.getElementById("g");
-        const hMinusFDom = document.getElementById("hMinusF");
-        const xyDom = document.getElementById("xy");
-        const hAddFDom = document.getElementById("hAddF");
-        const wzDom = document.getElementById("wz");
-
-        const fErrorDom = document.getElementById("f-error");
-        const xErrorDom = document.getElementById("x-error");
-        const yErrorDom = document.getElementById("y-error");
-        const zErrorDom = document.getElementById("z-error");
-
-        const generate = () => {
-          fErrorDom.innerText = "";
-          xErrorDom.innerText = "";
-          yErrorDom.innerText = "";
-          zErrorDom.innerText = "";
-
-          if (!xDom.value) {
-            xErrorDom.innerText = "Input this first";
-            return;
-          }
-
-          const x = parseInt(xDom.value);
-
-          if (!yDom.value) {
-            yErrorDom.innerText = "Input this first";
-            return;
-          }
-
-          const y = parseInt(yDom.value);
-
-          const xy = x * y;
-          const uniquePrimeFactorsOfXY = findUniquePrimeFactors(xy);
-
-          if (!zDom.value) {
-            zErrorDom.innerText = "Input this first";
-            return;
-          }
-
-          const z = parseInt(zDom.value);
-          const uniquePrimeFactorsOfZ = findUniquePrimeFactors(z);
-
-          if (
-            !uniquePrimeFactorsOfZ.every((val) =>
-              uniquePrimeFactorsOfXY.includes(val)
-            )
-          ) {
-            zErrorDom.innerText = `the factor(s) of z should have at least one of these factors: [${uniquePrimeFactorsOfXY.join(
-              ", "
-            )}]`;
-            return;
-          }
-
-          if (z > xy) {
-            zErrorDom.innerText = `z should be less than ${xy}`;
-            return;
-          }
-
-          const w = xy / z;
-
-          if (w !== parseInt(w)) {
-            zErrorDom.innerText = `z should be able to divide ${xy}`;
-            return;
-          }
-
-          const e = Math.abs((x + y - w - z) / 2);
-
-          if (!fDom.value) {
-            fErrorDom.innerText = "Input this first";
-            return;
-          }
-
-          const f = parseInt(fDom.value);
-
-          if (f <= e) {
-            fErrorDom.innerText = `f should be greater then ${e}`;
-            return;
-          }
-
-          const g = f ** 2 - e ** 2;
-          const h = (x + y + z + w) / 2;
-
-          const abcd = [x, y, z, w].sort((a, b) => a - b);
-
-          aDom.innerText = abcd[0];
-          bDom.innerText = abcd[1];
-          cDom.innerText = abcd[2];
-          dDom.innerText = abcd[3];
-          gDom.innerText = g;
-          hMinusFDom.innerText = h - f;
-          hAddFDom.innerText = h + f;
-          xyDom.innerText = xy;
-          wzDom.innerText = xy;
-        };
-
-        fDom.addEventListener("input", generate);
-        xDom.addEventListener("input", generate);
-        yDom.addEventListener("input", generate);
-        zDom.addEventListener("input", generate);
-      </script>
+      <script src="./script.js"></script>
     </footer>
   </body>
 </html>
